@@ -72,7 +72,7 @@ export default function Home({ user, onTabChange }) {
             </div>
             {/* Big Sun Decorative Graphic */}
             <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center text-white/10 text-5xl font-black absolute -top-2 -right-2 transform rotate-12 scale-150">
-              ☀️
+
             </div>
           </div>
           
