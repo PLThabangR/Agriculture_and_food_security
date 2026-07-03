@@ -1,5 +1,5 @@
-import LandingPage from './features/dashboard/LandingPage';
+import LandingPage from "./features/dashboard/LandingPage";
 
- export default function App() {
+export default function App() {
   return <LandingPage />;
 }
