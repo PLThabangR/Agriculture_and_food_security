@@ -1,16 +1,35 @@
 package com.agrigrow.backend.controller;
 
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.agrigrow.backend.model.ScanHistory;
 import com.agrigrow.backend.repository.ScanHistoryRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.multipart.MultipartFile;
-import java.time.LocalDateTime;
-import java.util.*;
+
+import jakarta.annotation.PostConstruct;
 
 @RestController
 @RequestMapping("/api/scanner")
@@ -28,6 +47,11 @@ public class ScanController {
     public ScanController(ScanHistoryRepository scanHistoryRepository) {
         this.scanHistoryRepository = scanHistoryRepository;
     }
+    @PostConstruct
+public void checkKey() {
+    System.out.println("Gemini key loaded: " + !geminiApiKey.isBlank());
+    System.out.println("Key length: " + geminiApiKey.length());
+}
 
     @GetMapping("/history")
     public ResponseEntity<List<ScanHistory>> getScanHistory() {
@@ -44,14 +68,18 @@ public class ScanController {
             return ResponseEntity.badRequest().body(Map.of("error", "No image file provided"));
         }
 
+        
+
+
         try {
             // Convert file to Base64
             String base64Image = Base64.getEncoder().encodeToString(file.getBytes());
             String mimeType = file.getContentType() != null ? file.getContentType() : "image/jpeg";
 
             // Prepare Gemini API Request
-            String url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + geminiApiKey;
-            
+                String url =
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key="
+    + geminiApiKey;
             // Build the JSON body
             Map<String, Object> requestBody = new HashMap<>();
             
@@ -79,8 +107,35 @@ public class ScanController {
             HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
 
             // Call Gemini API
-            ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
-            
+           // Call Gemini API
+ResponseEntity<String> response;
+
+System.out.println("========== GEMINI DEBUG ==========");
+System.out.println("Key loaded: " + !geminiApiKey.isBlank());
+System.out.println("Key prefix: " +
+        geminiApiKey.substring(0, Math.min(8, geminiApiKey.length())));
+System.out.println("Image size: " + file.getSize());
+System.out.println("Mime type: " + mimeType);
+System.out.println("URL: " + url);
+System.out.println("==================================");
+
+try {
+    response = restTemplate.postForEntity(url, entity, String.class);
+
+    System.out.println("========== GEMINI RESPONSE ==========");
+    System.out.println(response.getBody());
+    System.out.println("=====================================");
+
+} catch (org.springframework.web.client.HttpClientErrorException e) {
+
+    System.out.println("========== GEMINI ERROR ==========");
+    System.out.println("Status: " + e.getStatusCode());
+    System.out.println("Response:");
+    System.out.println(e.getResponseBodyAsString());
+    System.out.println("==================================");
+
+    throw e;
+}
             // Parse response
             JsonNode root = objectMapper.readTree(response.getBody());
             String aiResponseText = root.path("candidates").get(0).path("content").path("parts").get(0).path("text").asText();
@@ -126,9 +181,22 @@ public class ScanController {
             ScanHistory savedScan = scanHistoryRepository.save(scan);
             return ResponseEntity.ok(savedScan);
             
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "AI Analysis failed: " + e.getMessage()));
-        }
+        } catch (org.springframework.web.client.HttpClientErrorException e) {
+
+    System.out.println("========== GEMINI ERROR ==========");
+    System.out.println(e.getResponseBodyAsString());
+
+    return ResponseEntity.status(e.getStatusCode())
+            .body(Map.of(
+                    "error", e.getResponseBodyAsString()));
+
+} catch (Exception e) {
+
+    e.printStackTrace();
+
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .body(Map.of(
+                    "error", e.toString()));
+}
     }
 }

@@ -187,18 +187,6 @@ export default function Weather() {
                   <div className="weather-current-temp">{weatherData.temp}°C</div>
                   <div className="weather-current-cond">{weatherData.condition}</div>
                 </div>
-                <div>
-                  <div className="weather-soil-box">
-                    <span className="weather-soil-value">{weatherData.soilMoisture}%</span>
-                    <span className="weather-soil-lbl">SOIL MOISTURE</span>
-                  </div>
-                </div>
-              </div>
-              <div className="weather-current-tip-row">
-                <div className="weather-current-tip-txt">
-                  Optimal moisture for maize
-                </div>
-                <span className="weather-current-tip-badge">STABLE</span>
               </div>
             </div>
 
