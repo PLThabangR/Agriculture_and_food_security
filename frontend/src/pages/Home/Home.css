@@ -1,0 +1,411 @@
+/* Home page styling */
+.home-page {
+  padding-bottom: 96px;
+  max-width: 448px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fbf8ff;
+  min-height: 100vh;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  font-family: 'Inter', sans-serif;
+}
+
+.home-status-screen {
+  min-height: 100vh;
+  background-color: #fbf8ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+
+.home-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #0f5238;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.home-grid-columns {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Local Forecast Card */
+.home-weather-card {
+  background-color: #0f5238;
+  color: #ffffff;
+  border-radius: 24px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 15px -3px rgba(15, 82, 56, 0.1);
+}
+
+.home-weather-header {
+  margin-bottom: 24px;
+}
+
+.home-weather-meta {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #b1f0ce;
+  font-weight: 700;
+}
+
+.home-weather-temp-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.home-weather-temp {
+  font-size: 36px;
+  font-weight: 800;
+}
+
+.home-weather-cond {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+.home-recommendation {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.home-recommendation-text {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Quick Actions & Sections */
+.home-section-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #181a2e;
+  margin: 0 0 16px 0;
+}
+
+.home-actions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.home-action-card {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid #edecff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+}
+
+.home-action-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.home-action-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.home-action-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #181a2e;
+  margin: 0;
+}
+
+.home-action-desc {
+  font-size: 9px;
+  color: #404943;
+  margin: 2px 0 0 0;
+}
+
+.home-action-arrow {
+  color: #404943;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Subactions */
+.home-subactions-grid {
+  display: grid;
+  grid-template-cols: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.home-subaction-card {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid #edecff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+
+.home-subaction-card:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.home-subaction-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: #181a2e;
+  margin: 0;
+}
+
+/* Urgent Alert */
+.home-alert-card {
+  background-color: #fef2f2;
+  border: 1px solid #fee2e2;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.home-alert-tag {
+  font-size: 10px;
+  font-weight: 800;
+  color: #991b1b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.home-alert-message {
+  font-size: 12px;
+  color: #b91c1c;
+  line-height: 1.625;
+  margin: 4px 0 0 0;
+  font-weight: 500;
+}
+
+/* Crop Grid */
+.home-crop-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.home-crop-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #edecff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-crop-img-container {
+  height: 112px;
+  background-color: #f1f5f9;
+  position: relative;
+}
+
+.home-crop-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-crop-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background-color: #b1f0ce;
+  color: #0f5238;
+  font-size: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.home-crop-body {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.home-crop-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #181a2e;
+  margin: 0;
+}
+
+.home-health-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 8px;
+  color: #404943;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.home-health-progress-bg {
+  width: 100%;
+  height: 6px;
+  background-color: #edecff;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.home-health-progress-fill {
+  height: 100%;
+  background-color: #0f5238;
+  border-radius: 9999px;
+}
+
+.home-crop-yield {
+  display: block;
+  font-size: 8px;
+  color: rgba(64, 73, 67, 0.8);
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+/* Market Trends Card */
+.home-market-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #edecff;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.home-market-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #edecff;
+  padding-bottom: 12px;
+}
+
+.home-market-title {
+  font-size: 10px;
+  font-weight: 800;
+  color: #404943;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+.home-market-time {
+  font-size: 8px;
+  color: rgba(64, 73, 67, 0.6);
+}
+
+.home-market-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.home-market-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home-market-crop-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #181a2e;
+}
+
+.home-market-price-box {
+  text-align: right;
+}
+
+.home-market-price {
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  color: #181a2e;
+}
+
+.home-market-change {
+  font-size: 8px;
+  font-weight: 700;
+  margin-top: 2px;
+  display: block;
+}
+
+.home-market-change.up {
+  color: #16a34a;
+}
+
+.home-market-change.down {
+  color: #ef4444;
+}
+
+/* Responsive side-by-side layout for desktop viewports */
+@media (min-width: 768px) {
+  .home-page {
+    max-width: 1024px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+  
+  .home-grid-columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+  }
+
+  .home-column {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+}

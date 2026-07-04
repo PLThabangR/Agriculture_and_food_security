@@ -1,0 +1,318 @@
+/* Market page styling */
+.market-page {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  font-family: 'Inter', sans-serif;
+  padding-bottom: 96px;
+}
+
+.market-header {
+  background-color: #ffffff;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #f1f5f9;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.market-header-logo-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.market-header-logo {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f5238;
+}
+
+.market-header-help-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  background: none;
+  cursor: pointer;
+}
+
+.market-content-container {
+  padding: 24px 20px;
+  max-width: 448px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.market-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.market-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.market-section-meta {
+  font-size: 12px;
+  color: #9ca3af;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+
+.market-overview-row {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.market-page-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.market-header-price-info {
+  text-align: right;
+}
+
+.market-header-price-val {
+  font-size: 20px;
+  font-weight: 800;
+  color: #111827;
+  margin: 0;
+}
+
+.market-header-change-lbl {
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+  margin-top: 2px;
+}
+
+.market-header-change-lbl.up {
+  color: #22c55e;
+}
+
+.market-header-change-lbl.down {
+  color: #ef4444;
+}
+
+/* Sparkline Card */
+.market-sparkline-card {
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 16px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
+}
+
+.market-sparkline-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.market-sparkline-title {
+  font-size: 12px;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+.market-sparkline-badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #0f5238;
+  padding: 4px 12px;
+  border-radius: 9999px;
+}
+
+/* SAFEX Board */
+.market-board-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.market-board-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #111827;
+  margin: 0;
+}
+
+.market-board-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.market-board-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.market-board-icon-block {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.market-board-info {
+  flex: 1;
+}
+
+.market-board-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.market-board-meta {
+  font-size: 12px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.market-board-price-box {
+  text-align: right;
+}
+
+.market-board-price-val {
+  font-size: 14px;
+  font-weight: 800;
+  color: #111827;
+  margin: 0;
+}
+
+.market-board-change-val {
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+  margin-top: 2px;
+}
+
+.market-board-change-val.up {
+  color: #22c55e;
+}
+
+.market-board-change-val.down {
+  color: #ef4444;
+}
+
+.market-attribution-row {
+  font-size: 12px;
+  color: #9ca3af;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* CTA Banner */
+.market-cta-banner {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #0f5238;
+  padding: 24px;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+}
+
+.market-cta-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.15;
+}
+
+.market-cta-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.market-cta-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+}
+
+.market-cta-desc {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.625;
+  margin: 0 0 16px 0;
+}
+
+.market-cta-btn {
+  padding: 10px 20px;
+  background-color: #ffffff;
+  color: #0f5238;
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease;
+}
+
+.market-cta-btn:hover {
+  background-color: #f1f5f9;
+}
+
+/* Responsive grid layout */
+@media (min-width: 768px) {
+  .market-content-container {
+    max-width: 1024px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .market-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+  }
+}

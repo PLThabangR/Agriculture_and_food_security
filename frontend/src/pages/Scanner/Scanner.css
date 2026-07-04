@@ -1,0 +1,554 @@
+/* ─── Scanner Page ─────────────────────────────────────────────────────────── */
+.scanner-page,
+.scanner-result-page {
+  min-height: 100vh;
+  background: #f4f6f9;
+  font-family: 'Inter', sans-serif;
+  padding-bottom: 80px;
+}
+
+/* ─── Header ───────────────────────────────────────────────────────────────── */
+.scanner-header,
+.scanner-result-header {
+  background: #ffffff;
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e8edf2;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.scanner-header-logo-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.scanner-header-logo,
+.scanner-result-logo {
+  font-size: 17px;
+  font-weight: 800;
+  color: #0f5238;
+  letter-spacing: -0.3px;
+}
+
+.scanner-header-help-btn,
+.scanner-result-help-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid #e2e8f0;
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.scanner-header-help-btn:hover { background: #e8f5ee; color: #0f5238; }
+
+/* ─── Layout ───────────────────────────────────────────────────────────────── */
+.scanner-content-container {
+  padding: 28px 20px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.scanner-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.scanner-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ─── Instruction Banner ───────────────────────────────────────────────────── */
+.scanner-banner {
+  background: #ffffff;
+  border: 1px solid #e8edf2;
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+.scanner-banner-icon {
+  font-size: 18px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.scanner-banner-text {
+  color: #475569;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* ─── Camera / Preview Box ─────────────────────────────────────────────────── */
+.scanner-preview-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #d1dce8, #c4d0dc);
+  border: 2px dashed #b0bec5;
+  transition: border-color 0.2s;
+}
+
+.scanner-preview-card:hover {
+  border-color: #0f5238;
+}
+
+.scanner-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scanner-upload-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #64748b;
+}
+
+.scanner-upload-icon {
+  font-size: 40px;
+  line-height: 1;
+  opacity: 0.6;
+}
+
+.scanner-upload-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.scanner-upload-sub {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: -4px;
+}
+
+/* Viewfinder */
+.scanner-viewfinder-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.scanner-viewfinder-frame {
+  position: relative;
+  border: 1.5px solid rgba(255,255,255,0.6);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.scanner-viewfinder-frame.scanning {
+  border-color: #b1f0ce;
+  box-shadow: 0 0 24px rgba(177, 240, 206, 0.4);
+}
+
+.scanner-corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: #ffffff;
+  border-style: solid;
+}
+.scanner-corner.tl { top: -2px; left: -2px; border-width: 3px 0 0 3px; border-top-left-radius: 4px; }
+.scanner-corner.tr { top: -2px; right: -2px; border-width: 3px 3px 0 0; border-top-right-radius: 4px; }
+.scanner-corner.bl { bottom: -2px; left: -2px; border-width: 0 0 3px 3px; border-bottom-left-radius: 4px; }
+.scanner-corner.br { bottom: -2px; right: -2px; border-width: 0 3px 3px 0; border-bottom-right-radius: 4px; }
+
+/* Status bar at bottom of preview */
+.scanner-status-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: rgba(255,255,255,0.75);
+}
+
+.scanner-status-bold {
+  font-weight: 700;
+  color: #b1f0ce;
+}
+
+/* Scanning animation overlay */
+.scanner-scanning-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.scanner-scanning-pulse {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 3px solid #b1f0ce;
+  border-top-color: transparent;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.scanner-scanning-text {
+  color: #b1f0ce;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* ─── Scan Button ──────────────────────────────────────────────────────────── */
+.scanner-action-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.scanner-btn {
+  padding: 14px 20px;
+  font-weight: 700;
+  border-radius: 14px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.scanner-btn-primary {
+  flex: 1;
+  background: linear-gradient(135deg, #0f5238, #1a7a52);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(15, 82, 56, 0.3);
+}
+
+.scanner-btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(15, 82, 56, 0.4);
+}
+
+.scanner-btn-primary:disabled {
+  opacity: 0.7;
+  cursor: wait;
+  transform: none;
+}
+
+.scanner-btn-upload {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  color: #475569;
+  padding: 14px 18px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.scanner-btn-upload:hover {
+  border-color: #0f5238;
+  color: #0f5238;
+  background: #f0faf5;
+}
+
+/* ─── Recent Identifications ───────────────────────────────────────────────── */
+.scanner-recent-section {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 18px;
+  border: 1px solid #e8edf2;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.scanner-recent-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.scanner-recent-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #111827;
+  margin: 0;
+}
+
+.scanner-recent-link {
+  font-size: 12px;
+  font-weight: 600;
+  color: #0f5238;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.scanner-recent-link:hover { text-decoration: underline; }
+
+.scanner-recent-list {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+.scanner-recent-list::-webkit-scrollbar { display: none; }
+
+.scanner-recent-card {
+  flex-shrink: 0;
+  width: 130px;
+  background: #f8fafc;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e8edf2;
+  transition: box-shadow 0.2s;
+}
+
+.scanner-recent-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.scanner-recent-img-box {
+  height: 80px;
+}
+
+.scanner-recent-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scanner-recent-body {
+  padding: 8px 10px 10px;
+}
+
+.scanner-recent-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 5px 0;
+}
+
+.scanner-recent-badge {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+
+/* ─── Tip Card ─────────────────────────────────────────────────────────────── */
+.scanner-tip-card {
+  background: #ffffff;
+  border: 1px solid #e8edf2;
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+
+.scanner-tip-icon {
+  display: none;
+}
+
+.scanner-tip-content { flex: 1; }
+
+.scanner-tip-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 3px 0;
+}
+
+.scanner-tip-desc {
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ─── Result Page ──────────────────────────────────────────────────────────── */
+.scanner-result-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid #e8edf2;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.scanner-result-name {
+  font-size: 20px;
+  font-weight: 800;
+  color: #111827;
+  margin: 0 0 10px 0;
+  line-height: 1.3;
+}
+
+.scanner-result-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.scanner-result-badge {
+  background: #0f5238;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  letter-spacing: 0.3px;
+}
+
+.scanner-result-meta-txt {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.scanner-remediation-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 0 12px 0;
+}
+
+.scanner-remediation-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.scanner-remediation-card {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 14px;
+  border: 1px solid #e8edf2;
+}
+
+.scanner-remediation-lbl {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 4px 0;
+}
+
+.scanner-remediation-desc {
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.scanner-advice-card {
+  background: #f0faf5;
+  border: 1px solid #b7e4cc;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.scanner-advice-lbl {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f5238;
+  margin: 0 0 6px 0;
+}
+
+.scanner-advice-desc {
+  font-size: 13px;
+  color: #1a5c3a;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.scanner-btn-back {
+  width: 100%;
+  padding: 12px;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 4px;
+}
+
+.scanner-btn-back:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+/* ─── Desktop Layout ───────────────────────────────────────────────────────── */
+@media (min-width: 768px) {
+  .scanner-content-container {
+    max-width: 1100px;
+    padding: 36px 40px;
+  }
+
+  .scanner-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+
+  .scanner-recent-section {
+    margin-top: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .scanner-content-container {
+    max-width: 1200px;
+    padding: 40px 48px;
+  }
+  .scanner-grid {
+    grid-template-columns: 55% 45%;
+    gap: 32px;
+  }
+}
