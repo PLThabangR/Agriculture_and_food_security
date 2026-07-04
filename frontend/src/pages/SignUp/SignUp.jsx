@@ -20,7 +20,7 @@ export default function SignUp({ onNavigate }) {
     setLoading(true);
     try {
       const user = await apiService.register(form.name, form.email, form.password, role);
-      if (onNavigate) onNavigate("dashboard", user);
+      if (onNavigate) onNavigate("login");
     } catch (err) {
       setError(err.message || "Registration failed. Please try again.");
     } finally {

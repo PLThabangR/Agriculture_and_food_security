@@ -54,7 +54,7 @@ public class DataInitializer implements CommandLineRunner {
             corn.setEstimatedYield(4.2);
             corn.setYieldUnit("Tons");
             corn.setSector("East Sector (Corn Field)");
-            corn.setImageUrl("https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=600&auto=format&fit=crop&q=80");
+            corn.setImageUrl("https://images.unsplash.com/photo-1615485291262-eee9f6529056?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNvcm58ZW58MHx8MHx8fDA%3D");
             cropFieldRepository.save(corn);
 
             CropField cocoa = new CropField();
@@ -64,7 +64,7 @@ public class DataInitializer implements CommandLineRunner {
             cocoa.setEstimatedYield(1.8);
             cocoa.setYieldUnit("Tons");
             cocoa.setSector("West Sector (Cocoa Plantation)");
-            cocoa.setImageUrl("https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=600&auto=format&fit=crop&q=80");
+            cocoa.setImageUrl("https://images.unsplash.com/photo-1545567724-9b16e57c906d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNvY29hfGVufDB8fDB8fHww");
             cropFieldRepository.save(cocoa);
         }
 

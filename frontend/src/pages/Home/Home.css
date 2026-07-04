@@ -409,3 +409,26 @@
     gap: 32px;
   }
 }
+
+@media (min-width: 1024px) {
+  .home-page {
+    max-width: 1400px;
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+
+  .home-grid-columns {
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .home-grid-columns {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  
+  .home-column:first-child {
+    grid-column: span 2;
+  }
+}
