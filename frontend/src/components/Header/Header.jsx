@@ -23,7 +23,7 @@ export default function Header({ user }) {
         aria-label="Help"
         style={{ fontSize: "18px", fontWeight: "bold" }}
       >
-        ?
+
       </button>
     </header>
   );

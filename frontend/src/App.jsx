@@ -12,6 +12,7 @@ import BottomNavigation from "./components/BottomNavigation/BottomNavigation";
 import homeIcon from "./assets/icons/home.png";
 import taskIcon from "./assets/icons/task.png";
 import cameraIcon from "./assets/icons/camera.png";
+import tractorIcon from "./assets/icons/tractor-white.png";
 import priceIcon from "./assets/icons/price.png";
 import weatherIcon from "./assets/icons/weather.png";
 
@@ -21,7 +22,7 @@ const GUEST_USER = {
   lastName: "User",
   email: "guest@agrigrow.africa",
   role: "guest",
-  profileImage: "https://i.pravatar.cc/80?img=5",
+  profileImage: "https://images.unsplash.com/photo-1601370690183-1c7796ecec61?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGxhaW4lMjBncmVlbiUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D",
 };
 
 export default function App() {
@@ -100,8 +101,8 @@ export default function App() {
       <aside className="hidden md:flex flex-col w-64 bg-white border-r border-[#edecff] p-6 justify-between shrink-0 sticky top-0 h-screen z-40">
         <div className="flex flex-col gap-8">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-[#0f5238] flex items-center justify-center text-white font-bold text-xl shadow-md">
-              A
+            <div className="w-10 h-10 rounded-full bg-[#0f5238] flex items-center justify-center text-white shadow-md">
+              <img src={tractorIcon} alt="Tractor Logo" className="w-6 h-6 object-contain" />
             </div>
             <span className="font-extrabold text-[#0f5238] text-lg font-display">AgriGrow Africa</span>
           </div>
@@ -144,7 +145,7 @@ export default function App() {
 
         <div className="flex flex-col gap-4 border-t border-[#edecff] pt-4">
           <div className="flex items-center gap-3">
-            <img src={user?.profileImage || "https://i.pravatar.cc/80?img=5"} alt="Profile" className="w-10 h-10 rounded-full object-cover" />
+            <img src={user?.profileImage || "https://images.unsplash.com/photo-1601370690183-1c7796ecec61?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGxhaW4lMjBncmVlbiUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D"} alt="Profile" className="w-10 h-10 rounded-full object-cover" />
             <div className="flex flex-col">
               <span className="font-bold text-xs text-gray-800">{user?.firstName || "Farmer"} {user?.lastName || ""}</span>
               <span className="text-3xs text-gray-400 capitalize">{user?.role || "User"}</span>

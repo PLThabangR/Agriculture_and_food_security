@@ -57,9 +57,6 @@ export default function Market() {
       {/* Header */}
       <header className="market-header">
         <div className="market-header-logo-section">
-          <div style={{ width: "36px", height: "36px", borderRadius: "50%", overflow: "hidden" }}>
-            <img src="https://i.pravatar.cc/40?img=11" alt="User" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-          </div>
           <span className="market-header-logo">AgriGrow Africa</span>
         </div>
         <button className="market-header-help-btn">?</button>

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { apiService } from "../../services/apiService";
+import { db } from "../../services/db";
+import tractorIcon from "../../assets/icons/tractor-white.png";
 import { FiLogIn } from "react-icons/fi";
 
 // Import your brand new smart farming graphic asset here
@@ -32,8 +34,8 @@ export default function Login({ onLoginSuccess, onNavigate }) {
       {/* Header */}
       <header className="bg-white border-b border-[#edecff] px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-3 cursor-pointer" onClick={() => onNavigate('landing')}>
-          <div className="w-10 h-10 rounded-full bg-[#0f5238] flex items-center justify-center text-white font-bold text-xl shadow-md">
-            A
+          <div className="w-10 h-10 rounded-full bg-[#0f5238] flex items-center justify-center text-white shadow-md">
+            <img src={tractorIcon} alt="Tractor Logo" className="w-6 h-6 object-contain" />
           </div>
           <span className="text-xl font-bold text-[#0f5238] font-display">AgriGrow Africa</span>
         </div>

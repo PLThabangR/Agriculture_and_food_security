@@ -181,10 +181,6 @@ export default function Scanner() {
           <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#0f5238", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 800, fontSize: 16 }}>A</div>
           <span className="scanner-header-logo">AgriGrow Africa</span>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <span style={{ fontSize: 12, color: "#64748b", fontWeight: 500, background: "#f0faf5", padding: "4px 12px", borderRadius: 9999, border: "1px solid #b7e4cc" }}>Powered by Gemini AI</span>
-          <button className="scanner-header-help-btn">?</button>
-        </div>
       </header>
 
       <div className="scanner-content-container">

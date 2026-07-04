@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import tractorIcon from "../../assets/icons/tractor-white.png";
 
 export default function Landing({ onNavigate }) {
   const [testimonialIdx, setTestimonialIdx] = useState(0);
@@ -54,7 +55,12 @@ export default function Landing({ onNavigate }) {
     <div className="min-h-screen bg-white font-sans">
       {/* Navigation */}
       <header className="sticky top-0 z-50 bg-white border-b border-gray-100 px-6 md:px-12 py-4 flex items-center justify-between">
-        <span className="text-lg font-bold text-[#0f5238]">AgriGrow Africa</span>
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-[#0f5238] flex items-center justify-center text-white shadow-md">
+            <img src={tractorIcon} alt="Tractor Logo" className="w-6 h-6 object-contain" />
+          </div>
+          <span className="text-lg font-bold text-[#0f5238]">AgriGrow Africa</span>
+        </div>
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
           {[
             { label: "Home", id: "home" },
