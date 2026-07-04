@@ -48,8 +48,12 @@ export const apiService = {
 
   // ─── Dashboard ─────────────────────────────────────────────────────────────
 
-  async getDashboardSummary() {
-    const res = await fetch(`${API_BASE_URL}/dashboard/summary`);
+  async getDashboardSummary(lat, lon) {
+    let url = `${API_BASE_URL}/dashboard/summary`;
+    if (lat != null && lon != null) {
+      url += `?lat=${lat}&lon=${lon}`;
+    }
+    const res = await fetch(url);
     if (!res.ok) throw new Error("Failed to get dashboard summary");
     return res.json();
   },
@@ -97,7 +101,7 @@ export const weatherService = {
       `&current=temperature_2m,relative_humidity_2m,windspeed_10m,precipitation_probability,weathercode` +
       `&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_max` +
       `&hourly=soil_moisture_0_to_1cm` +
-      `&forecast_days=5&timezone=Africa%2FJohannesburg`;
+      `&forecast_days=5&timezone=auto`;
 
     const res = await fetch(url);
     if (!res.ok) throw new Error("Weather fetch failed");
@@ -134,13 +138,19 @@ export const weatherService = {
       return "⛈️";
     };
 
-    const forecast = (daily.time || []).map((date, i) => ({
-      day: new Date(date).toLocaleDateString("en-US", { weekday: "short" }),
-      icon: emojiFromCode(daily.weathercode?.[i] ?? 0),
-      high: Math.round(daily.temperature_2m_max?.[i] ?? 25),
-      low: Math.round(daily.temperature_2m_min?.[i] ?? 15),
-      rainPct: daily.precipitation_probability_max?.[i] ?? 0,
-    }));
+    const forecast = (daily.time || []).map((date, i) => {
+      const d = new Date(date + "T12:00:00");
+      let dayName = d.toLocaleDateString("en-US", { weekday: "short" });
+      if (i === 0) dayName = "Today";
+      
+      return {
+        day: dayName,
+        icon: emojiFromCode(daily.weathercode?.[i] ?? 0),
+        high: Math.round(daily.temperature_2m_max?.[i] ?? 25),
+        low: Math.round(daily.temperature_2m_min?.[i] ?? 15),
+        rainPct: daily.precipitation_probability_max?.[i] ?? 0,
+      };
+    });
 
     return {
       temp: Math.round(cur.temperature_2m ?? 28),

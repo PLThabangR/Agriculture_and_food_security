@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FiEye, FiEyeOff, FiLogIn } from "react-icons/fi";
 import { apiService } from "../../services/apiService";
 
 export default function Login({ onLoginSuccess, onNavigate }) {
@@ -99,7 +98,7 @@ export default function Login({ onLoginSuccess, onNavigate }) {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-4 top-1/2 -translate-y-1/2 text-[#404943] hover:text-[#181a2e] transition-colors"
                   >
-                    {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
+                    {showPassword ? "Hide" : "Show"}
                   </button>
                 </div>
               </div>
@@ -109,7 +108,7 @@ export default function Login({ onLoginSuccess, onNavigate }) {
                 disabled={loading}
                 className="w-full py-4 rounded-xl text-white bg-[#0f5238] hover:bg-[#2d6a4f] font-bold shadow-md shadow-[#0f5238]/10 flex items-center justify-center gap-2 transition-all disabled:opacity-50"
               >
-                {loading ? "Signing In..." : "Sign In"} <FiLogIn size={18} />
+                {loading ? "Signing In..." : "Sign In"}
               </button>
             </form>
 
@@ -125,7 +124,7 @@ export default function Login({ onLoginSuccess, onNavigate }) {
                 <span className="font-extrabold tracking-tight">GOOGLE</span> <span className="text-2xs text-[#404943]/60">Google</span>
               </button>
               <button className="flex items-center justify-center gap-2 py-3 rounded-xl border border-[#bfc9c1] text-xs font-bold text-[#181a2e] bg-white hover:bg-slate-50 transition-colors">
-                <span>🛡️</span> <span>Partner</span>
+                <span>Partner</span>
               </button>
             </div>
 

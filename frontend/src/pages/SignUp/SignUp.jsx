@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FiEye, FiEyeOff } from "react-icons/fi";
 import { apiService } from "../../services/apiService";
 
 export default function SignUp({ onNavigate }) {
@@ -84,7 +83,6 @@ export default function SignUp({ onNavigate }) {
               <div>
                 <label className="block text-xs font-semibold text-gray-700 mb-2">Full Name</label>
                 <div className="flex items-center border border-gray-300 rounded-xl px-4 py-3 gap-2 focus-within:border-[#0f5238] transition-colors">
-                  <span className="text-gray-400">👤</span>
                   <input
                     type="text"
                     placeholder="Kwame Mensah"
@@ -99,7 +97,6 @@ export default function SignUp({ onNavigate }) {
               <div>
                 <label className="block text-xs font-semibold text-gray-700 mb-2">Email Address</label>
                 <div className="flex items-center border border-gray-300 rounded-xl px-4 py-3 gap-2 focus-within:border-[#0f5238] transition-colors">
-                  <span className="text-gray-400">✉️</span>
                   <input
                     type="email"
                     placeholder="name@example.com"
@@ -114,7 +111,6 @@ export default function SignUp({ onNavigate }) {
               <div>
                 <label className="block text-xs font-semibold text-gray-700 mb-2">Create Password</label>
                 <div className="flex items-center border border-gray-300 rounded-xl px-4 py-3 gap-2 focus-within:border-[#0f5238] transition-colors">
-                  <span className="text-gray-400">🔒</span>
                   <input
                     type={showPass ? "text" : "password"}
                     placeholder="••••••••"
@@ -122,8 +118,8 @@ export default function SignUp({ onNavigate }) {
                     value={form.password}
                     onChange={e => setForm({...form, password: e.target.value})}
                   />
-                  <button type="button" onClick={() => setShowPass(!showPass)} className="text-gray-400 hover:text-gray-600">
-                    {showPass ? <FiEyeOff /> : <FiEye />}
+                  <button type="button" onClick={() => setShowPass(!showPass)} className="text-gray-400 hover:text-gray-600 text-xs font-semibold">
+                    {showPass ? "Hide" : "Show"}
                   </button>
                 </div>
               </div>
@@ -137,7 +133,6 @@ export default function SignUp({ onNavigate }) {
                     onClick={() => setRole("farmer")}
                     className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all ${role === "farmer" ? "border-[#0f5238] bg-[#f0faf5]" : "border-gray-200 bg-white hover:border-gray-300"}`}
                   >
-                    <span className="text-2xl">🌱</span>
                     <span className={`text-xs font-bold ${role === "farmer" ? "text-[#0f5238]" : "text-gray-700"}`}>Farmer</span>
                   </button>
                   <button
@@ -145,7 +140,6 @@ export default function SignUp({ onNavigate }) {
                     onClick={() => setRole("partner")}
                     className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all ${role === "partner" ? "border-[#0f5238] bg-[#f0faf5]" : "border-gray-200 bg-white hover:border-gray-300"}`}
                   >
-                    <span className="text-2xl">🤝</span>
                     <span className={`text-xs font-bold ${role === "partner" ? "text-[#0f5238]" : "text-gray-700"}`}>Partner</span>
                   </button>
                 </div>
@@ -200,10 +194,10 @@ export default function SignUp({ onNavigate }) {
           </div>
           <div>
             <h5 className="font-semibold text-xs text-[#0f5238] uppercase tracking-widest mb-3">Connect</h5>
-            <div className="flex gap-2 text-gray-400 text-sm">
-              <span className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center cursor-pointer hover:bg-[#b1f0ce] hover:text-[#0f5238] transition-colors">🌐</span>
-              <span className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center cursor-pointer hover:bg-[#b1f0ce] hover:text-[#0f5238] transition-colors">📡</span>
-              <span className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center cursor-pointer hover:bg-[#b1f0ce] hover:text-[#0f5238] transition-colors">🌿</span>
+            <div className="flex gap-3 text-xs text-gray-400">
+              <span>Web</span>
+              <span>Blog</span>
+              <span>News</span>
             </div>
           </div>
         </div>

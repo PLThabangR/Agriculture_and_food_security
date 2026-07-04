@@ -1,8 +1,6 @@
+import React from "react";
 import "./Header.css";
-import { FiHelpCircle } from "react-icons/fi";
 import { APP } from "../../utils/constants";
-
-
 
 export default function Header({ user }) {
   return (
@@ -23,8 +21,9 @@ export default function Header({ user }) {
       <button
         className="header__help"
         aria-label="Help"
+        style={{ fontSize: "18px", fontWeight: "bold" }}
       >
-        <FiHelpCircle size={24} />
+        ?
       </button>
     </header>
   );

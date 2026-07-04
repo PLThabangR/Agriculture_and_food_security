@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FiArrowRight, FiSmartphone, FiTrendingUp, FiCpu, FiCloudRain, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 export default function Landing({ onNavigate }) {
   const [testimonialIdx, setTestimonialIdx] = useState(0);
@@ -103,7 +102,7 @@ export default function Landing({ onNavigate }) {
           </p>
           <div className="flex flex-wrap gap-4">
             <button onClick={() => onNavigate('login')} className="px-6 py-3 bg-white text-[#0f5238] font-bold rounded-lg text-sm flex items-center gap-2 hover:bg-slate-100 transition-colors shadow-lg">
-              Get Started Free <FiArrowRight />
+              Get Started Free
             </button>
             <button onClick={() => onNavigate('guest')} className="px-6 py-3 bg-transparent border border-white/50 text-white font-bold rounded-lg text-sm hover:bg-white/10 transition-colors">
               Explore the App
@@ -163,17 +162,15 @@ export default function Landing({ onNavigate }) {
             {/* Vision AI Crop Scanner */}
             <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
               <div className="w-10 h-10 bg-[#b1f0ce]/30 rounded-xl flex items-center justify-center mb-4">
-                <FiSmartphone className="text-[#0f5238] text-lg" />
               </div>
               <h3 className="font-bold text-gray-900 mb-2 text-sm">Vision AI Crop Scanner</h3>
               <p className="text-xs text-gray-500 leading-relaxed mb-4">Instant pest and disease identification using just your smartphone camera. Get treatment advice in seconds, even offline.</p>
-              <button onClick={() => onNavigate('login')} className="text-xs font-bold text-[#0f5238] flex items-center gap-1">Learn More <FiArrowRight className="text-xs" /></button>
+              <button onClick={() => onNavigate('login')} className="text-xs font-bold text-[#0f5238] flex items-center gap-1">Learn More</button>
             </div>
 
             {/* Market Insights - dark green card */}
             <div className="bg-[#0f5238] p-6 rounded-2xl shadow-sm text-white">
               <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center mb-4">
-                <FiTrendingUp className="text-white text-lg" />
               </div>
               <h3 className="font-bold text-white mb-2 text-sm">Market Insights</h3>
               <p className="text-xs text-white/75 leading-relaxed mb-4">Real-time pricing from local markets to help you sell at the right time and the best price.</p>
@@ -186,17 +183,15 @@ export default function Landing({ onNavigate }) {
             {/* Smart Advisory - light bg */}
             <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
               <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center mb-4">
-                <FiCpu className="text-blue-500 text-lg" />
               </div>
               <h3 className="font-bold text-gray-900 mb-2 text-sm">Smart Advisory</h3>
               <p className="text-xs text-gray-500 leading-relaxed mb-4">Step-by-step guidance on planting, fertilization, and harvesting based on your micro-climate.</p>
-              <button onClick={() => onNavigate('login')} className="text-xs font-bold text-[#0f5238] flex items-center gap-1">Get Personalized Plan <FiArrowRight className="text-xs" /></button>
+              <button onClick={() => onNavigate('login')} className="text-xs font-bold text-[#0f5238] flex items-center gap-1">Get Personalized Plan</button>
             </div>
 
             {/* Hyper-Local Weather - salmon/red card */}
             <div className="bg-red-50 border border-red-100 p-6 rounded-2xl shadow-sm">
               <div className="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center mb-4">
-                <FiCloudRain className="text-red-500 text-lg" />
               </div>
               <h3 className="font-bold text-red-900 mb-2 text-sm">Hyper-Local Weather</h3>
               <p className="text-xs text-red-700 leading-relaxed">Predictive rainfall tracking and extreme weather alerts delivered via SMS or App notification.</p>
@@ -215,10 +210,10 @@ export default function Landing({ onNavigate }) {
             </div>
             <div className="flex gap-2">
               <button onClick={prev} className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-colors">
-                <FiChevronLeft />
+                &lt;
               </button>
               <button onClick={next} className="w-10 h-10 rounded-full bg-[#0f5238] flex items-center justify-center text-white hover:bg-[#2d6a4f] transition-colors">
-                <FiChevronRight />
+                &gt;
               </button>
             </div>
           </div>

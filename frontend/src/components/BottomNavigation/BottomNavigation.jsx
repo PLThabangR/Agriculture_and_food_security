@@ -1,5 +1,6 @@
 import React from "react";
 import { FiGrid, FiCamera, FiCpu, FiShoppingBag, FiSun } from "react-icons/fi";
+import "./BottomNavigation.css";
 
 export default function BottomNavigation({ activeTab, onTabChange }) {
   const tabs = [
@@ -11,24 +12,20 @@ export default function BottomNavigation({ activeTab, onTabChange }) {
   ];
 
   return (
-    <div className="fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-[#edecff] py-3 px-4 flex items-center justify-between z-50 max-w-lg mx-auto shadow-2xl">
+    <div className="bottom-nav">
       {tabs.map((tab) => {
         const isActive = activeTab === tab.id;
         return (
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`flex flex-col items-center justify-center transition-all ${
-              isActive 
-                ? "bg-[#0f5238] text-white px-4 py-2 rounded-full flex-row gap-2" 
-                : "text-[#404943] hover:text-[#0f5238] px-2 py-2"
-            }`}
+            className={`bottom-nav-btn ${isActive ? "active" : ""}`}
           >
             {tab.icon}
             {isActive ? (
-              <span className="text-2xs font-extrabold tracking-wide">{tab.label}</span>
+              <span className="bottom-nav-label-active">{tab.label}</span>
             ) : (
-              <span className="text-[10px] font-semibold mt-1">{tab.label}</span>
+              <span className="bottom-nav-label-inactive">{tab.label}</span>
             )}
           </button>
         );
