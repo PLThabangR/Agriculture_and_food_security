@@ -38,8 +38,8 @@ public class DataInitializer implements CommandLineRunner {
             user.setEmail("farmer@agrigrow.africa");
             // Simple plain text password for this demo/local setup. In a real app we'd BCrypt it.
             user.setPassword("password");
-            user.setFirstName("Kwame");
-            user.setLastName("Mensah");
+            user.setFirstName("Yonela");
+            user.setLastName("Seetsi");
             // Beautiful avatar
             user.setProfileImage("https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face");
             userRepository.save(user);
