@@ -147,7 +147,7 @@ export default function Weather() {
       <header className="weather-header">
         <div className="weather-header-logo-section">
           <div style={{ width: "36px", height: "36px", borderRadius: "50%", overflow: "hidden" }}>
-            <img src = '../assets/icons/weather' alt="Weather Icon" style={{ width: "100%", height: "100%" }} />
+            
           </div>
           <span className="weather-header-logo">AgriGrow</span>
         </div>
