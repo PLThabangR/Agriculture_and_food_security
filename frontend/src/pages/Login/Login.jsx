@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { FiEye, FiEyeOff, FiLogIn } from "react-icons/fi";
 import { apiService } from "../../services/apiService";
 
+// Import your brand new smart farming graphic asset here
+import smartFarmingImg from "../../assets/iStock-2075877369-1.jpg";
+
 export default function Login({ onLoginSuccess, onNavigate }) {
   const [email, setEmail] = useState("farmer@agrigrow.africa");
   const [password, setPassword] = useState("password");
@@ -43,7 +46,7 @@ export default function Login({ onLoginSuccess, onNavigate }) {
 
         <div className="flex items-center gap-3">
           <button className="px-5 py-2 text-sm font-semibold text-[#0f5238] border border-[#0f5238] rounded-full bg-[#b1f0ce]/10">
-            Sign In
+            Log In
           </button>
           <button onClick={() => onNavigate('signup')} className="px-5 py-2 text-sm font-semibold text-white bg-[#0f5238] rounded-full hover:bg-[#2d6a4f]">
             Sign Up
@@ -73,7 +76,7 @@ export default function Login({ onLoginSuccess, onNavigate }) {
                   type="email" 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="farmer@agrigrow.africa" 
+                  placeholder="" 
                   required
                   className="w-full px-4 py-3 rounded-xl border border-[#bfc9c1] bg-white text-sm text-[#181a2e] focus:outline-none focus:border-[#0f5238] focus:ring-1 focus:ring-[#0f5238] transition-all"
                 />
@@ -90,7 +93,7 @@ export default function Login({ onLoginSuccess, onNavigate }) {
                     type={showPassword ? "text" : "password"} 
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••" 
+                    placeholder="" 
                     required
                     className="w-full px-4 py-3 pr-12 rounded-xl border border-[#bfc9c1] bg-white text-sm text-[#181a2e] focus:outline-none focus:border-[#0f5238] focus:ring-1 focus:ring-[#0f5238] transition-all"
                   />
@@ -109,7 +112,7 @@ export default function Login({ onLoginSuccess, onNavigate }) {
                 disabled={loading}
                 className="w-full py-4 rounded-xl text-white bg-[#0f5238] hover:bg-[#2d6a4f] font-bold shadow-md shadow-[#0f5238]/10 flex items-center justify-center gap-2 transition-all disabled:opacity-50"
               >
-                {loading ? "Signing In..." : "Sign In"} <FiLogIn size={18} />
+                {loading ? "Signing In..." : "Log In"} <FiLogIn size={18} />
               </button>
             </form>
 
@@ -122,10 +125,10 @@ export default function Login({ onLoginSuccess, onNavigate }) {
 
             <div className="grid grid-cols-2 gap-4">
               <button className="flex items-center justify-center gap-2 py-3 rounded-xl border border-[#bfc9c1] text-xs font-bold text-[#181a2e] bg-white hover:bg-slate-50 transition-colors">
-                <span className="font-extrabold tracking-tight">GOOGLE</span> <span className="text-2xs text-[#404943]/60">Google</span>
+                <span className="font-extrabold tracking-tight"></span> <span className="text-2xs text-[#404943]/60">Google</span>
               </button>
               <button className="flex items-center justify-center gap-2 py-3 rounded-xl border border-[#bfc9c1] text-xs font-bold text-[#181a2e] bg-white hover:bg-slate-50 transition-colors">
-                <span>🛡️</span> <span>Partner</span>
+                <span></span> <span>Partner</span>
               </button>
             </div>
 
@@ -137,18 +140,18 @@ export default function Login({ onLoginSuccess, onNavigate }) {
             </p>
           </div>
 
-          {/* Right: Cover Info Panel */}
+          {/* Right: Cover Info Panel referencing iStock-2075877369-1.jpg */}
           <div className="relative hidden md:block bg-slate-100">
             <img 
-              src="https://images.unsplash.com/photo-1590244921253-53f2c510c063?w=600&auto=format&fit=crop&q=80" 
-              alt="African woman farmer" 
+              src={smartFarmingImg} 
+              alt="Precision smart farming fields" 
               className="w-full h-full object-cover filter brightness-95"
             />
-            {/* Dark green overlay with glassmorphism */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0f5238]/90 via-transparent to-transparent flex flex-col justify-end p-12 text-white">
+            {/* Elegant deep green overlay configuration matching the header aesthetics */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0f5238]/90 via-[#0f5238]/20 to-transparent flex flex-col justify-end p-12 text-white">
               <h3 className="text-3xl font-extrabold mb-4 leading-tight">Cultivate a Smarter Future</h3>
-              <p className="text-sm text-white/80 leading-relaxed max-w-sm">
-                Join 50,000+ farmers using AI-driven precision to maximize yield and ensure food security for Africa.
+              <p className="text-sm text-white/85 leading-relaxed max-w-sm font-medium">
+                Join over 50,000 farmers using AI-driven precision and data visualizations to maximize crop yield performance across Africa.
               </p>
             </div>
           </div>
