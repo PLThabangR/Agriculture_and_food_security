@@ -70,9 +70,9 @@ export default function Home({ user, onTabChange }) {
                 <span className="text-sm text-white/80 font-medium">{weather?.condition}</span>
               </div>
             </div>
-            {/* Swapped out raw emoji string for an opacity vector icon element */}
-            <div className="absolute -top-2 -right-2 transform rotate-12 scale-150 text-white/10 opacity-30">
-              <FiSun size={76} strokeWidth={1} />
+            {/* Big Sun Decorative Graphic */}
+            <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center text-white/10 text-5xl font-black absolute -top-2 -right-2 transform rotate-12 scale-150">
+
             </div>
           </div>
           
