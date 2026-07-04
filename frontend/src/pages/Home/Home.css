@@ -3,16 +3,17 @@
   max-width: 430px;
   margin: auto;
   min-height: 100vh;
-
   background: #f8f9fb;
-
   padding: 20px;
-
   padding-bottom: 90px;
-
   display: flex;
   flex-direction: column;
   gap: 24px;
-
   font-family: Inter, sans-serif;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
 }

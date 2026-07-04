@@ -78,7 +78,7 @@ export default function Landing({ onNavigate }) {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <button onClick={() => onNavigate('login')} className="text-sm font-semibold text-gray-700 hover:text-[#0f5238] transition-colors">Sign In</button>
+          <button onClick={() => onNavigate('login')} className="text-sm font-semibold text-gray-700 hover:text-[#0f5238] transition-colors">Log In</button>
           <button onClick={() => onNavigate('signup')} className="px-5 py-2 text-sm font-bold text-white bg-[#0f5238] rounded-lg hover:bg-[#2d6a4f] transition-colors">Sign Up</button>
         </div>
       </header>
