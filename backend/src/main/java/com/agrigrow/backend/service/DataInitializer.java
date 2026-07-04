@@ -54,7 +54,7 @@ public class DataInitializer implements CommandLineRunner {
             corn.setEstimatedYield(4.2);
             corn.setYieldUnit("Tons");
             corn.setSector("East Sector (Corn Field)");
-            corn.setImageUrl("https://images.unsplash.com/photo-1551754625-703247072fd6?w=600&auto=format&fit=crop&q=60");
+            corn.setImageUrl("https://www.grainsa.co.za/upload/maize_disease2016_01_01.jpg");
             cropFieldRepository.save(corn);
 
             CropField cocoa = new CropField();
@@ -64,7 +64,7 @@ public class DataInitializer implements CommandLineRunner {
             cocoa.setEstimatedYield(1.8);
             cocoa.setYieldUnit("Tons");
             cocoa.setSector("West Sector (Cocoa Plantation)");
-            cocoa.setImageUrl("https://images.unsplash.com/photo-1587132137056-bfbf0166836e?w=600&auto=format&fit=crop&q=60");
+            cocoa.setImageUrl("https://hgic.clemson.edu/wp-content/uploads/2021/05/bacterial-spot-xanthomonas-perforans-symptoms-ca.jpeg");
             cropFieldRepository.save(cocoa);
         }
 

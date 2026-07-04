@@ -78,7 +78,7 @@ public void checkKey() {
 
             // Prepare Gemini API Request
                 String url =
-    "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key="
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key="
     + geminiApiKey;
             // Build the JSON body
             Map<String, Object> requestBody = new HashMap<>();

@@ -1,89 +1,112 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { apiService } from "../../services/apiService";
 import "./Scanner.css";
 
-function ScanResult({ scan, onBack, onAddToPlanner, filePreviewUrl }) {
-  const disease = scan?.diseaseName || "Maize Leaf Rust (Puccinia sorghi)";
+function ScanResult({ scan, onBack, filePreviewUrl }) {
+  const disease = scan?.diseaseName || "Unknown Condition";
   const crop = scan?.cropName || "Unknown Crop";
-  const confidence = scan?.confidence || 98.0;
-  const advice = scan?.advice || "Treat with triazole foliar sprays.";
-  const sampleId = scan?.sampleId || "MZ-RUST-001";
-  
+  const confidence = scan?.confidence || 0;
+  const advice = scan?.advice || "Consult an agronomist for detailed advice.";
+  const sampleId = scan?.sampleId || "N/A";
+  const status = scan?.status || "ACTION REQ";
+
+  const statusColor = {
+    "HEALTHY": "#10b981",
+    "STABLE": "#3b82f6",
+    "TREATED": "#0f5238",
+    "ACTION REQ": "#ef4444",
+  }[status] || "#6b7280";
+
   return (
     <div className="scanner-result-page">
-      {/* Offline banner */}
-      <div style={{ backgroundColor: "#111827", color: "#ffffff", textAlign: "center", fontSize: "12px", padding: "8px 0" }}>
-        Offline Mode: Data cached for Free State Region
-      </div>
-      
       {/* Header */}
       <header className="scanner-result-header">
         <div className="scanner-header-logo-section">
-          <div style={{ width: "36px", height: "36px", borderRadius: "50%", overflow: "hidden" }}>
-            <img src="https://i.pravatar.cc/40?img=11" alt="User" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-          </div>
+          <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#0f5238", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 800, fontSize: 16 }}>A</div>
           <span className="scanner-result-logo">AgriGrow Africa</span>
         </div>
-        <button className="scanner-result-help-btn">?</button>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <span style={{ fontSize: 12, color: "#6b7280", fontWeight: 500 }}>Sample ID: <strong style={{ color: "#111827" }}>{sampleId}</strong></span>
+          <button className="scanner-result-help-btn">?</button>
+        </div>
       </header>
 
-      {/* Scan image with overlay */}
-      <div className="scanner-preview-card" style={{ height: "220px", borderRadius: 0 }}>
-        <img
-          src={filePreviewUrl || scan?.imageUrl || "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Puccinia_sorghi_on_corn.jpg/640px-Puccinia_sorghi_on_corn.jpg"}
-          alt="scan"
-          className="scanner-preview-img"
-          style={{ opacity: 0.9 }}
-        />
-        {/* Corner frame */}
-        <div className="scanner-viewfinder-overlay">
-          <div className="scanner-viewfinder-frame" style={{ width: "208px", height: "144px" }}>
-            <div className="scanner-corner tl" />
-            <div className="scanner-corner tr" />
-            <div className="scanner-corner bl" />
-            <div className="scanner-corner br" />
-          </div>
-        </div>
-      </div>
-
-      <div className="scanner-content-container" style={{ marginTop: "16px" }}>
+      <div className="scanner-content-container">
         <div className="scanner-grid">
-          {/* Left Column */}
+          {/* Left — Image + Result */}
           <div className="scanner-column">
-            {/* Disease Name */}
-            <div className="scanner-result-card">
-              <p style={{ margin: "0 0 4px 0", fontSize: "14px", color: "#64748b", fontWeight: 600 }}>Crop: {crop}</p>
-              <h2 className="scanner-result-name">{disease} Detected</h2>
-              <div className="scanner-result-meta-row">
-                <span className="scanner-result-badge">{confidence.toFixed(1)}% Confidence</span>
-                <span className="scanner-result-meta-txt">Processed via Gemini AI</span>
+            {/* Scanned Image */}
+            <div className="scanner-preview-card" style={{ height: 260, cursor: "default", border: "none" }}>
+              <img
+                src={filePreviewUrl || scan?.imageUrl || "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600&auto=format&fit=crop&q=80"}
+                alt="Scanned crop"
+                className="scanner-preview-img"
+              />
+              <div className="scanner-viewfinder-overlay">
+                <div className="scanner-viewfinder-frame" style={{ width: 200, height: 140 }}>
+                  <div className="scanner-corner tl" />
+                  <div className="scanner-corner tr" />
+                  <div className="scanner-corner bl" />
+                  <div className="scanner-corner br" />
+                </div>
+              </div>
+              <div className="scanner-status-bar">
+                <span>AI Analysis Complete</span>
+                <span style={{ color: "#b1f0ce", fontWeight: 700 }}>Gemini 2.5</span>
               </div>
             </div>
-            <p className="scanner-result-meta-txt" style={{ textAlign: "center" }}>Sample ID: {sampleId}</p>
+
+            {/* Disease result card */}
+            <div className="scanner-result-card">
+              <p style={{ margin: "0 0 4px", fontSize: 13, color: "#64748b", fontWeight: 600 }}>
+                Crop Identified: <strong style={{ color: "#0f5238" }}>{crop}</strong>
+              </p>
+              <h2 className="scanner-result-name">{disease}</h2>
+              <div className="scanner-result-meta-row">
+                <span className="scanner-result-badge">{confidence.toFixed(1)}% Confidence</span>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontSize: 11, fontWeight: 700, color: statusColor, background: statusColor + "15", padding: "3px 10px", borderRadius: 9999 }}>
+                  ● {status}
+                </span>
+              </div>
+              <p style={{ fontSize: 12, color: "#9ca3af", marginTop: 8, marginBottom: 0 }}>Processed via Gemini 2.5 Flash Vision AI</p>
+            </div>
+
             <button onClick={onBack} className="scanner-btn-back">
-              Back to Scanner
+              ← Back to Scanner
             </button>
           </div>
 
-          {/* Right Column */}
+          {/* Right — Remediation + Advice */}
           <div className="scanner-column">
-            {/* Remediation strategy */}
-            <div>
-              <p className="scanner-remediation-title">REMEDIATION STRATEGY</p>
-              <div className="scanner-remediation-grid">
-                <div className="scanner-remediation-card">
-                  <h4 className="scanner-remediation-lbl">Scout Fields</h4>
-                  <p className="scanner-remediation-desc">Check sectors B4 & C2 for infection threshold levels.</p>
-                </div>
-                <div className="scanner-remediation-card">
-                  <h4 className="scanner-remediation-lbl">Apply Fungicide</h4>
-                  <p className="scanner-remediation-desc">Use registered SA triazole foliar sprays (approx. R450/ha).</p>
-                </div>
+            <p className="scanner-remediation-title">Remediation Strategy</p>
+            <div className="scanner-remediation-grid">
+              <div className="scanner-remediation-card">
+                <h4 className="scanner-remediation-lbl">Scout Fields</h4>
+                <p className="scanner-remediation-desc">Check all sectors for infection spread before applying treatment.</p>
               </div>
+              <div className="scanner-remediation-card">
+                <h4 className="scanner-remediation-lbl">Apply Treatment</h4>
+                <p className="scanner-remediation-desc">Use registered fungicide or pesticide appropriate for detected condition.</p>
+              </div>
+              <div className="scanner-remediation-card">
+                <h4 className="scanner-remediation-lbl">Monitor Moisture</h4>
+                <p className="scanner-remediation-desc">Avoid overwatering — excess moisture promotes fungal spread.</p>
+              </div>
+              <div className="scanner-remediation-card">
+                <h4 className="scanner-remediation-lbl">Record Scan</h4>
+                <p className="scanner-remediation-desc">Log this result in your field records for seasonal tracking.</p>
+              </div>
+            </div>
 
-              <div className="scanner-advice-card">
-                <h4 className="scanner-advice-lbl">AI Advice</h4>
-                <p className="scanner-advice-desc">{advice}</p>
+            <div className="scanner-advice-card">
+              <h4 className="scanner-advice-lbl">AI Advice</h4>
+              <p className="scanner-advice-desc">{advice}</p>
+            </div>
+
+            <div className="scanner-tip-card">
+              <div className="scanner-tip-content">
+                <p className="scanner-tip-title">Next Steps</p>
+                <p className="scanner-tip-desc">Rescan weekly to monitor treatment progress. Early intervention reduces crop loss by up to 70%.</p>
               </div>
             </div>
           </div>
@@ -97,17 +120,15 @@ export default function Scanner() {
   const [scanning, setScanning] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [scanData, setScanData] = useState(null);
-  const [addedToPlanner, setAddedToPlanner] = useState(false);
   const [error, setError] = useState("");
-
   const [selectedFile, setSelectedFile] = useState(null);
   const [filePreviewUrl, setFilePreviewUrl] = useState(null);
   const fileInputRef = useRef(null);
 
   const RECENT = [
-    { name: "Tomato Blight", status: "ACTION REQ", image: "https://images.unsplash.com/photo-1592841200221-a6898f307baa?w=150" },
-    { name: "Healthy Corn", status: "STABLE", image: "https://images.unsplash.com/photo-1634467524884-897d0af5e104?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29ybnxlbnwwfHwwfHx8MA%3D%3D" },
-    { name: "Wheat Rust", status: "TREATED", image: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=150" },
+    { name: "Tomato Blight", status: "ACTION REQ", statusColor: "#ef4444", bg: "#fef2f2", image: "https://images.unsplash.com/photo-1592841200221-a6898f307baa?w=300" },
+    { name: "Healthy Corn", status: "STABLE", statusColor: "#3b82f6", bg: "#eff6ff", image: "https://images.unsplash.com/photo-1634467524884-897d0af5e104?w=300" },
+    { name: "Wheat Rust", status: "TREATED", statusColor: "#0f5238", bg: "#f0faf5", image: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=300" },
   ];
 
   const handleFileChange = (e) => {
@@ -119,15 +140,9 @@ export default function Scanner() {
     }
   };
 
-  const triggerFileInput = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
   const handleScan = async () => {
     if (!selectedFile) {
-      setError("Please select or upload a picture of the affected crop leaf first.");
+      setError("Please upload a photo of the affected crop leaf first.");
       return;
     }
     setScanning(true);
@@ -137,18 +152,10 @@ export default function Scanner() {
       setScanData(result);
       setShowResult(true);
     } catch (e) {
-      setError("Scan failed. Make sure the backend is running on port 8080.");
+      setError(e.message || "Scan failed. Please try again.");
     } finally {
       setScanning(false);
     }
-  };
-
-  const handleAddToPlanner = () => {
-    setAddedToPlanner(true);
-    setTimeout(() => {
-      setShowResult(false);
-      setAddedToPlanner(false);
-    }, 1500);
   };
 
   if (showResult) {
@@ -161,7 +168,6 @@ export default function Scanner() {
           setFilePreviewUrl(null);
           if (fileInputRef.current) fileInputRef.current.value = "";
         }}
-        onAddToPlanner={handleAddToPlanner}
         filePreviewUrl={filePreviewUrl}
       />
     );
@@ -172,70 +178,68 @@ export default function Scanner() {
       {/* Header */}
       <header className="scanner-header">
         <div className="scanner-header-logo-section">
-          <div style={{ width: "36px", height: "36px", borderRadius: "50%", overflow: "hidden" }}>
-            <img src="https://i.pravatar.cc/40?img=11" alt="User" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-          </div>
+          <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#0f5238", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontWeight: 800, fontSize: 16 }}>A</div>
           <span className="scanner-header-logo">AgriGrow Africa</span>
         </div>
-        <button className="scanner-header-help-btn">?</button>
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <span style={{ fontSize: 12, color: "#64748b", fontWeight: 500, background: "#f0faf5", padding: "4px 12px", borderRadius: 9999, border: "1px solid #b7e4cc" }}>Powered by Gemini AI</span>
+          <button className="scanner-header-help-btn">?</button>
+        </div>
       </header>
 
       <div className="scanner-content-container">
         <div className="scanner-grid">
-          {/* Left Column (Camera box) */}
+          {/* ── Left Column: Camera + Upload ── */}
           <div className="scanner-column">
             {/* Instruction Banner */}
             <div className="scanner-banner">
-              <p className="scanner-banner-text">Position the affected leaf clearly within the white frame. Ensure bright natural light.</p>
+              <p className="scanner-banner-text">
+                Upload a clear photo of the affected crop leaf. Ensure good lighting and keep the leaf in focus for the most accurate AI diagnosis.
+              </p>
             </div>
 
-            {/* Camera View */}
+            {/* Preview Box */}
             <div
               className="scanner-preview-card"
-              style={{ height: "340px", cursor: "pointer" }}
-              onClick={triggerFileInput}
+              style={{ height: 340, cursor: "pointer" }}
+              onClick={() => fileInputRef.current?.click()}
             >
-              {filePreviewUrl && (
-                <img
-                  src={filePreviewUrl}
-                  alt="camera view"
-                  className="scanner-preview-img"
-                  style={{ opacity: 0.8 }}
-                />
+              {filePreviewUrl ? (
+                <img src={filePreviewUrl} alt="Selected crop" className="scanner-preview-img" />
+              ) : (
+                <div className="scanner-upload-placeholder">
+                  <span className="scanner-upload-label">Click to Upload Crop Photo</span>
+                  <span className="scanner-upload-sub">JPG, PNG or HEIC supported</span>
+                </div>
               )}
-              {/* Scan overlay frame */}
+
+              {/* Viewfinder */}
               <div className="scanner-viewfinder-overlay">
-                <div className={`scanner-viewfinder-frame ${scanning ? "scanning" : ""}`} style={{ width: "260px", height: "200px" }}>
+                <div className={`scanner-viewfinder-frame ${scanning ? "scanning" : ""}`} style={{ width: 260, height: 200 }}>
                   <div className="scanner-corner tl" />
                   <div className="scanner-corner tr" />
                   <div className="scanner-corner bl" />
                   <div className="scanner-corner br" />
-                  {!filePreviewUrl && (
-                    <div className="scanner-viewfinder-overlay" style={{ background: "transparent", borderRadius: "16px" }}>
-                      <div style={{ color: "#64748b", fontWeight: "bold", fontSize: "14px", textAlign: "center", padding: "12px" }}>
-                        Click to Upload / Capture Picture
-                      </div>
-                    </div>
-                  )}
-                  {scanning && (
-                    <div className="scanner-viewfinder-overlay">
-                      <div style={{ color: "#b1f0ce", fontWeight: "bold", fontSize: "12px" }}>Analyzing...</div>
-                    </div>
-                  )}
                 </div>
               </div>
 
-              {/* Status bar overlay at bottom */}
+              {/* Scanning spinner */}
+              {scanning && (
+                <div className="scanner-scanning-overlay">
+                  <div className="scanner-scanning-pulse" />
+                  <span className="scanner-scanning-text">Analyzing with Gemini AI...</span>
+                </div>
+              )}
+
+              {/* Status bar */}
               <div className="scanner-status-bar">
-                <span>Status: <span className="scanner-status-bold">{selectedFile ? "Ready to Scan" : "No File Selected"}</span></span>
-                <span style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "160px" }}>
-                  File: <span style={{ fontWeight: "bold" }}>{selectedFile ? selectedFile.name : "None"}</span>
-                </span>
+                <span>Status: <span className="scanner-status-bold">{selectedFile ? "Ready to Scan" : "Awaiting Upload"}</span></span>
+                {selectedFile && <span style={{ maxWidth: 160, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontWeight: 600 }}>📁 {selectedFile.name}</span>}
               </div>
             </div>
 
-            {/* Scan Button */}
-            <div className="scanner-action-btn-list" style={{ display: "flex", marginTop: "16px" }}>
+            {/* Action buttons */}
+            <div className="scanner-action-row">
               <input
                 type="file"
                 ref={fileInputRef}
@@ -243,21 +247,21 @@ export default function Scanner() {
                 accept="image/*"
                 style={{ display: "none" }}
               />
+              <button className="scanner-btn-upload" onClick={() => fileInputRef.current?.click()}>
+                Upload
+              </button>
               <button
                 onClick={handleScan}
-                disabled={scanning}
+                disabled={scanning || !selectedFile}
                 className="scanner-btn scanner-btn-primary"
-                style={{ width: "100%", margin: 0 }}
               >
                 {scanning ? "Scanning..." : "Scan Now"}
               </button>
             </div>
           </div>
 
-          {/* Right Column (Triggers + History + Tips) */}
+          {/* ── Right Column: History + Tip ── */}
           <div className="scanner-column">
-            {/* Removed top action buttons */}
-
             {/* Recent Identifications */}
             <div className="scanner-recent-section">
               <div className="scanner-recent-header">
@@ -272,11 +276,7 @@ export default function Scanner() {
                     </div>
                     <div className="scanner-recent-body">
                       <p className="scanner-recent-name">{r.name}</p>
-                      <span className={`scanner-recent-badge ${
-                        r.status === "TREATED" ? "bg-[#0f5238] text-white" :
-                        r.status === "ACTION REQ" ? "bg-red-100 text-red-600" :
-                        "bg-gray-100 text-gray-600"
-                      }`}>
+                      <span className="scanner-recent-badge" style={{ background: r.bg, color: r.statusColor }}>
                         {r.status}
                       </span>
                     </div>
@@ -285,26 +285,39 @@ export default function Scanner() {
               </div>
             </div>
 
-            {/* Scanner Tip */}
+            {/* How it works */}
+            <div className="scanner-result-card">
+              <p style={{ fontSize: 12, fontWeight: 700, color: "#6b7280", textTransform: "uppercase", letterSpacing: "0.08em", margin: "0 0 12px" }}>How It Works</p>
+              {[
+                { num: "1", step: "Upload Photo", desc: "Take or upload a clear photo of your crop leaf" },
+                { num: "2", step: "AI Analysis", desc: "Gemini 2.5 Flash identifies the crop and disease" },
+                { num: "3", step: "Get Advice", desc: "Receive tailored remediation and treatment advice" },
+              ].map((s, i) => (
+                <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start", marginBottom: i < 2 ? 12 : 0 }}>
+                  <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#0f5238", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 800, color: "#fff", flexShrink: 0 }}>{s.num}</div>
+                  <div>
+                    <p style={{ margin: 0, fontSize: 13, fontWeight: 700, color: "#111827" }}>{s.step}</p>
+                    <p style={{ margin: 0, fontSize: 12, color: "#6b7280", lineHeight: 1.4 }}>{s.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Tip Card */}
             <div className="scanner-tip-card">
+              <span className="scanner-tip-icon">💡</span>
               <div className="scanner-tip-content">
-                <p className="scanner-tip-title">Scanner Tip</p>
-                <p className="scanner-tip-desc">Avoid blurry photos. Hold your phone steady and 15-20cm away from the leaf for the most accurate AI diagnosis.</p>
+                <p className="scanner-tip-title">Scanning Tip</p>
+                <p className="scanner-tip-desc">Hold your phone 15–20cm from the leaf in bright natural light. Avoid shadows and blurry images for the most accurate diagnosis.</p>
               </div>
             </div>
-          </div> {/* Closing Right Column */}
-        </div> {/* Closing Grid Container */}
+          </div>
+        </div>
       </div>
 
-      {/* Added to planner toast */}
-      {addedToPlanner && (
-        <div style={{ position: "fixed", top: "80px", left: "50%", transform: "translateX(-50%)", backgroundColor: "#0f5238", color: "#ffffff", fontSize: "12px", fontWeight: "bold", padding: "12px 20px", borderRadius: "9999px", boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)", zIndex: 50 }}>
-          Added to Weekly Planner!
-        </div>
-      )}
       {/* Error toast */}
       {error && (
-        <div style={{ position: "fixed", top: "80px", left: "50%", transform: "translateX(-50%)", backgroundColor: "#dc2626", color: "#ffffff", fontSize: "12px", fontWeight: "bold", padding: "12px 20px", borderRadius: "9999px", boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)", zIndex: 50 }}>
+        <div style={{ position: "fixed", bottom: 32, left: "50%", transform: "translateX(-50%)", background: "#dc2626", color: "#fff", fontSize: 13, fontWeight: 700, padding: "12px 24px", borderRadius: 9999, boxShadow: "0 8px 24px rgba(220,38,38,0.3)", zIndex: 50, whiteSpace: "nowrap" }}>
           {error}
         </div>
       )}
