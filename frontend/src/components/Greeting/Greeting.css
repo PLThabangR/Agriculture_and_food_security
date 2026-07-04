@@ -1,0 +1,20 @@
+.greeting {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.subtitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.greeting h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.3;
+}
