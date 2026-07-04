@@ -41,7 +41,7 @@ public class DataInitializer implements CommandLineRunner {
             user.setFirstName("Yonela");
             user.setLastName("Seetsi");
             // Beautiful avatar
-            user.setProfileImage("https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face");
+            user.setProfileImage("https://images.unsplash.com/photo-1601370690183-1c7796ecec61?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGxhaW4lMjBncmVlbiUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D");
             userRepository.save(user);
         }
 
